@@ -20,8 +20,8 @@ body {
 /* Grid 响应式网格 */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -30,7 +30,8 @@ body {
 .card {
   background: #fff;
   border-radius: 12px;
-  padding: 20px;
+  padding: 26px;
+  min-height: 240px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
