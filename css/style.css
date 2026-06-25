@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f5f7f9;
+  color: #333;
+  padding: 20px;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  margin: 40px 0;
+}
+.app-header h1 { color: #2c3e50; font-size: 2.5rem; }
+
+/* Grid 响应式网格 */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card 方块样式 */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+}
+.card h3 { margin-bottom: 10px; color: #34495e; }
+.card p { font-size: 0.9rem; color: #7f8c8d; line-height: 1.4; flex-grow: 1; }
+.tags { margin-top: 15px; }
+.tag {
+  display: inline-block;
+  background: #eef2f7;
+  color: #64748b;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+
+/* 全屏预览遮罩层 */
+.preview-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #fff;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.preview-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 预览页头部 */
+.preview-header {
+  height: 50px;
+  background: #1e293b;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.close-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* iframe 容器 */
+.preview-body { flex-grow: 1; background: #000; }
+#previewIframe { width: 100%; height: 100%; background: #fff; }

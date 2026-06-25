@@ -1,0 +1,96 @@
+/* 局部复位，确保在 iframe 中表现完美 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #edf2f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 时钟外层容器 */
+.clock-container {
+  position: relative;
+}
+
+/* 拟物态表盘：通过双重阴影（亮边与暗边）实现凸起视觉 */
+.clock {
+  width: 300px;
+  height: 300px;
+  background-color: #edf2f7;
+  border-radius: 50%;
+  border: 4px solid #edf2f7;
+  box-shadow: 
+    -8px -8px 20px #ffffff,
+    8px 8px 20px rgba(166, 180, 200, 0.7),
+    inset -4px -4px 10px #ffffff,
+    inset 4px 4px 10px rgba(166, 180, 200, 0.4);
+  position: relative;
+}
+
+/* 表盘中心轴 */
+.center-nut {
+  width: 14px;
+  height: 14px;
+  background-color: #2d3748;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* 指针通用样式 */
+.hand {
+  position: absolute;
+  bottom: 50%; /* 底端对齐表盘中心 */
+  left: 50%;
+  transform-origin: bottom center; /* 关键：以指针的底部中心为旋转点 */
+  border-radius: 4px;
+  transform: translateX(-50%) rotate(0deg); /* 初始居中靠 JS 改变 rotate */
+}
+
+/* 时针 */
+.hour-hand {
+  width: 6px;
+  height: 65px;
+  background-color: #2d3748;
+  z-index: 7;
+}
+
+/* 分针 */
+.min-hand {
+  width: 4px;
+  height: 90px;
+  background-color: #4a5568;
+  z-index: 8;
+}
+
+/* 秒针 */
+.sec-hand {
+  width: 2px;
+  height: 110px;
+  background-color: #e53e3e; /* 红色秒针更灵动 */
+  z-index: 9;
+  border-radius: 0;
+}
+
+/* 刻度数字样式 */
+.number {
+  position: absolute;
+  color: #718096;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.n12 { top: 15px; left: 50%; transform: translateX(-50%); }
+.n3  { right: 15px; top: 50%; transform: translateY(-50%); }
+.n6  { bottom: 15px; left: 50%; transform: translateX(-50%); }
+.n9  { left: 15px; top: 50%; transform: translateY(-50%); }
