@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTISAN CODE // 独立创意前端开发</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <svg class="svg-filter-container">
+        <defs>
+            <filter id="ink-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.02" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" id="displacement-map" />
+            </filter>
+        </defs>
+    </svg>
+
+    <canvas id="canvas-canvas"></canvas>
+
+    <header class="fixed-nav">
+        <div class="nav-logo">ARTISAN.DEV [2026]</div>
+        <div class="nav-ticker">
+            <span class="ticker-wrap">
+                01011001 01001111 01010101 // NO TEMPLATES // ONLY 8 SLOTS PER YEAR // 01011001 01001111 01010101 // NO TEMPLATES // ONLY 8 SLOTS PER YEAR
+            </span>
+        </div>
+        <div class="nav-status">STATUS: RESERVED [4/8]</div>
+    </header>
+
+    <main class="distortable-content">
+
+        <section class="section-hero" id="home">
+            <div class="grid-line line-1"></div>
+            <div class="grid-line line-2"></div>
+            <div class="hero-title-container">
+                <h1 class="hero-title">CREATIVE</h1>
+                <h1 class="hero-title stroke-text">DEVELOPER</h1>
+            </div>
+            <div class="hero-footer-grid">
+                <div class="manifesto-mini">
+                    [法式先锋印刷美学 ✕ 极限代码交互定位]<br>
+                    拒绝柔和渐变。拒绝千篇一律的 SaaS 模块。用极端的视觉，筛选志同道合的激进品牌。
+                </div>
+                <div class="scroll-indicator">[ SCROLL DOWN TO CAPTURE RADIATION ]</div>
+            </div>
+        </section>
+
+        <section class="section-about" id="about">
+            <div class="binary-divider">01000001 01000010 01001111 01010101 01010100</div>
+            <div class="about-grid">
+                <div class="about-left">
+                    <span class="big-glyph">匠</span>
+                </div>
+                <div class="about-right">
+                    <p class="serif-manifesto">
+                        我是定居巴黎的独立创意开发匠人。我将老式报纸的粗黑活字印刷和工业版画的冰冷质感，揉碎并注入现代浏览器的底层渲染管线中。
+                    </p>
+                    <p class="serif-body">
+                        专为高端品牌代理商、独立平面设计师提供极端复杂的滚动动画落地。我不制造实用的企业网站，我只交付能拿下 Awwwards 奖项的数字视觉名片。每年仅限定与 <strong class="highlight-black">8 个</strong> 审美激进的甲方合作。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-works" id="works">
+            <div class="bg-huge-text">W.O.R.K.S</div>
+            <div class="works-grid">
+                <div class="work-card size-m" data-img="project1.jpg">
+                    <div class="work-meta">#01 / EXPERIMENT</div>
+                    <h3 class="work-title">ANTI-SAAS TEMPLATE</h3>
+                    <div class="work-tags">WebGL / Typography / Fluid</div>
+                </div>
+                <div class="work-card size-l" data-img="project2.jpg">
+                    <div class="work-meta">#02 / BRANDING</div>
+                    <h3 class="work-title">RAW SILKSCREEN</h3>
+                    <div class="work-tags">CSS Shader / Canvas2D / Brutal</div>
+                </div>
+                <div class="work-card size-s" data-img="project3.jpg">
+                    <div class="work-meta">#03 / INTERACTIVE</div>
+                    <h3 class="work-title">CYBER FOLDS 2026</h3>
+                    <div class="work-tags">Vite / Raw-JS / Matrix</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-contact" id="contact">
+            <div class="binary-divider">01000011 01001111 01001110 01010100 01000001 01000011 01001100</div>
+            <div class="contact-container">
+                <h2 class="contact-title">START A REVOLUTION?</h2>
+                
+                <div class="brutal-table">
+                    <div class="table-row">
+                        <div class="table-cell label">SERVICE</div>
+                        <div class="table-cell value">高定动效全站开发 / 极致交互设计落地 / 品牌数字名片</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell label">BUDGET</div>
+                        <div class="table-cell value">€15,000+ (不接受低于此预算的模板微调项目)</div>
+                    </div>
+                </div>
+
+                <form class="brutal-form" onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <input type="text" placeholder="YOUR NAME / AGENCY" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="YOUR EMAIL" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="PROJECT BRIEF (DESCRIBE YOUR RADICAL IDEA)" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">SEND BRIEF // 发射提案</button>
+                </form>
+            </div>
+        </main>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

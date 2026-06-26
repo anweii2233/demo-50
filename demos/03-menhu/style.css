@@ -1,0 +1,406 @@
+/* ==========================================================================
+   1. 全局极致丝网印刷规范 (RESET & FONTS)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: crosshair; /* 增强实验艺术感 */
+}
+
+:root {
+    --color-bg: #E60028;       /* 强刺激海报正红 */
+    --color-text: #000000;     /* 纯黑工业活字油墨 */
+    --font-heading: 'Syne', sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-mono: 'Space Mono', monospace;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+    word-break: break-all;
+    padding-top: 40px; /* 给顶部固定条留位置 */
+}
+
+/* 隐藏隐藏的SVG滤镜容器 */
+.svg-filter-container {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* 核心滤镜挂载点 */
+.distortable-content {
+    filter: url(#ink-distortion);
+    will-change: transform;
+}
+
+/* 底层Canvas互动线条画布 */
+#canvas-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ==========================================================================
+   2. 导航与走马灯条 (FIXED HEADER & TICKER)
+   ========================================================================== */
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    background: var(--color-bg);
+    border-bottom: 3px solid var(--color-text);
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    z-index: 999;
+    padding: 0 20px;
+}
+
+.nav-ticker {
+    overflow: hidden;
+    white-space: nowrap;
+    border-left: 3px solid var(--color-text);
+    border-right: 3px solid var(--color-text);
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-wrap {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker-move 25s linear infinite;
+}
+
+@keyframes ticker-move {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* ==========================================================================
+   3. 破碎网格首页 (HERO SECTION)
+   ========================================================================== */
+.section-hero {
+    position: relative;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 40px 40px 40px;
+    z-index: 2;
+}
+
+/* 模拟参考网站的不规则竖向切割线 */
+.grid-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-text);
+    opacity: 0.8;
+}
+.line-1 { left: 35%; }
+.line-2 { left: 75%; }
+
+.hero-title-container {
+    margin-top: 10vh;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 12vw, 16rem);
+    line-height: 0.85;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px var(--color-text); /* 粗粝硬边3D立体 */
+}
+
+.stroke-text {
+    color: transparent;
+    -webkit-text-stroke: 3px var(--color-text);
+    text-shadow: none;
+}
+
+.hero-footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: flex-end;
+    border-top: 3px solid var(--color-text);
+    padding-top: 20px;
+}
+
+.manifesto-mini {
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+.scroll-indicator {
+    text-align: right;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+/* 二进制分割条包装 */
+.binary-divider {
+    font-size: 0.75rem;
+    border-top: 3px solid var(--color-text);
+    border-bottom: 3px solid var(--color-text);
+    padding: 8px 40px;
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+/* ==========================================================================
+   4. 反差衬线关于页 (ABOUT SECTION)
+   ========================================================================== */
+.section-about {
+    position: relative;
+    z-index: 2;
+    background-color: var(--color-bg);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    padding: 80px 40px;
+}
+
+.about-left {
+    display: flex;
+    align-items: flex-start;
+}
+
+.big-glyph {
+    font-size: 12rem;
+    line-height: 1;
+    font-weight: 900;
+    border: 5px solid var(--color-text);
+    padding: 10px 30px;
+}
+
+.about-right {
+    padding-left: 40px;
+}
+
+.serif-manifesto {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 40px;
+    color: var(--color-text);
+}
+
+.serif-body {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 800px;
+}
+
+.highlight-black {
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 2px 8px;
+}
+
+/* ==========================================================================
+   5. 自由拼贴作品库 (WORKS SECTION)
+   ========================================================================== */
+.section-works {
+    position: relative;
+    padding: 120px 40px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* 底层巨型立体装饰文字 */
+.bg-huge-text {
+    position: absolute;
+    top: 5%;
+    left: -5%;
+    font-family: var(--font-heading);
+    font-size: 24vw;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.15);
+    font-weight: 900;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.works-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 80px;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+
+/* 破碎错落非卡片化样式 */
+.work-card {
+    border-left: 5px solid var(--color-text);
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.work-card:hover {
+    transform: translateX(15px) scale(1.02);
+}
+
+.size-s { width: 25%; margin-top: 15vh; }
+.size-m { width: 35%; margin-top: 0; }
+.size-l { width: 50%; margin-top: 5vh; }
+
+.work-meta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.work-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    line-height: 1;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.work-tags {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   6. 工业破损表格与表单 (CONTACT SECTION)
+   ========================================================================== */
+.section-contact {
+    position: relative;
+    padding: 80px 40px 120px 40px;
+    z-index: 2;
+}
+
+.contact-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.contact-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-weight: 800;
+    margin-bottom: 5px;
+    letter-spacing: -0.03em;
+}
+
+/* 边缘破损效果的硬核表格 */
+.brutal-table {
+    border: 3px solid var(--color-text);
+    margin-bottom: 60px;
+    background: transparent;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 3px solid var(--color-text);
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.table-cell {
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+.table-cell.label {
+    font-weight: 700;
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-right: 3px solid var(--color-text);
+}
+
+/* 块状纯黑输入框 */
+.brutal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    background: transparent;
+    border: 3px solid var(--color-text);
+    padding: 20px;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--color-text);
+    outline: none;
+    transition: background 0.2s ease;
+}
+
+.form-group input::placeholder, 
+.form-group textarea::placeholder {
+    color: rgba(0,0,0,0.6);
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    background: rgba(0,0,0,0.05);
+}
+
+.submit-btn {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border: none;
+    padding: 25px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: var(--color-bg);
+    color: var(--color-text);
+    box-shadow: inset 0 0 0 4px var(--color-text);
+}
+
+/* ==========================================================================
+   7. 响应式规则：确保大字号在手机上不崩塌
+   ========================================================================== */
+@media (max-width: 768px) {
+    .fixed-nav { grid-template-columns: 1fr; }
+    .nav-ticker, .nav-status { display: none; }
+    .grid-line { display: none; }
+    .about-grid { grid-template-columns: 1fr; padding: 40px 20px; }
+    .about-left { display: none; }
+    .about-right { padding-left: 0; }
+    .works-grid { flex-direction: column; gap: 40px; }
+    .work-card { width: 100% !important; margin-top: 0 !important; }
+    .table-row { grid-template-columns: 1fr; }
+    .table-cell.label { border-right: none; border-bottom: 3px solid var(--color-text); }
+}
